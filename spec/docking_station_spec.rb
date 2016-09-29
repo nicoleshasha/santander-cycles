@@ -13,26 +13,26 @@ describe DockingStation do
 
   it 'docks a bike' do
     bike = Bike.new
-    expect(subject.dock_bike(bike)).to eq bike
+    expect(subject.dock_bike(bike)).to eq [bike]
   end
 
   it 'returns docked bike' do
     bike = Bike.new
     subject.dock_bike(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.bikes).to eq [bike]
   end
 
   it 'doesn\'t release a bike when there are none' do
     docking_station = DockingStation.new
-    if docking_station.bike == nil
+    if docking_station.bikes == nil
       expect {subject.release_bike}.to raise_error("No bikes available")
     end
   end
 
   it "doesn't accept more than capacity" do
     bike = Bike.new
-    subject.dock_bike(bike)
-    if subject.bike != nil
+    20.times{subject.dock_bike(bike)}
+    if subject.bikes.count >= 20
       expect {subject.dock_bike(bike)}.to raise_error("Bike station full")
     end
   end
