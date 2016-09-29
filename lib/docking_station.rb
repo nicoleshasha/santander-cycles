@@ -7,7 +7,8 @@ class DockingStation
   end
 
   def dock_bike(bike)
-      @bike = bike
+    raise "Bike station full" if @bike != nil
+    @bike = bike
   end
 
 attr_reader :bike

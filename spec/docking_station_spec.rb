@@ -29,5 +29,12 @@ describe DockingStation do
     end
   end
 
+  it "doesn't accept more than capacity" do
+    bike = Bike.new
+    subject.dock_bike(bike)
+    if subject.bike != nil
+      expect {subject.dock_bike(bike)}.to raise_error("Bike station full")
+    end
+  end
 
 end
