@@ -31,8 +31,8 @@ describe DockingStation do
 
   it "doesn't accept more than capacity" do
     bike = Bike.new
-    20.times{subject.dock_bike(bike)}
-    if subject.bikes.count >= 20
+    DockingStation::DEFAULT_CAPACITY.times{subject.dock_bike(bike)}
+    if subject.bikes.count >= DockingStation::DEFAULT_CAPACITY
       expect {subject.dock_bike(bike)}.to raise_error("Bike station full")
     end
   end
