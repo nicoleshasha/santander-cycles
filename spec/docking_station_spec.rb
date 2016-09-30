@@ -6,8 +6,8 @@ describe DockingStation do
 
 
   it 'releases working bikes' do
-    bike = Bike.new
-    bike2 = Bike.new
+    bike = double(:bike)
+    bike2 = double(:bike)
     bike2.report_broken
     station = DockingStation.new
     station.dock_bike(bike)
@@ -16,12 +16,12 @@ describe DockingStation do
   end
 
   it 'docks a bike' do
-    bike = Bike.new
+    bike = double(:bike)
     expect(subject.dock_bike(bike)).to eq [bike]
   end
 
   it 'returns docked bike' do
-    bike = Bike.new
+    bike = double(:bike)
     subject.dock_bike(bike)
     expect(subject.bikes).to eq [bike]
   end
@@ -32,7 +32,7 @@ describe DockingStation do
   end
 
   it 'doesn\'t accept more than capacity' do
-    bike = Bike.new
+    bike = double(:bike)
     DockingStation::DEFAULT_CAPACITY.times{subject.dock_bike(bike)}
     expect {subject.dock_bike(bike)}.to raise_error("Bike station full")
   end
@@ -47,11 +47,11 @@ describe DockingStation do
   end
 
   it 'only releases working bikes' do
-    bike = Bike.new
+    bike = double(:bike)
     bike.report_broken
 
     subject.dock_bike(bike)
-    subject.dock_bike(Bike.new)
+    subject.dock_bike(double(:bike))
     expect(subject.release_bike).not_to be_broken
   end
 end
