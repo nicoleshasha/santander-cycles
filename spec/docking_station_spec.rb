@@ -29,7 +29,7 @@ describe DockingStation do
     end
   end
 
-  it "doesn't accept more than capacity" do
+  it 'doesn\'t accept more than capacity' do
     bike = Bike.new
     DockingStation::DEFAULT_CAPACITY.times{subject.dock_bike(bike)}
     if subject.bikes.count >= DockingStation::DEFAULT_CAPACITY
@@ -37,4 +37,12 @@ describe DockingStation do
     end
   end
 
+  it 'allows user to set capacity' do
+  docking_station = DockingStation.new(25)
+   expect(docking_station.capacity).to eq 25
+end
+
+it 'has a default capacity of 20' do
+  expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+end
 end
